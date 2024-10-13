@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use \App\Enum\UserRole;
+use \App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,9 +12,24 @@ Route::get('/', function () {
 
 // We willen 3 veschillende dashboard routes: admin / teacher / student
 
-Route::get('/admin/dashboard', function () {
-   return view('admin.dashboard');
-})->middleware(['auth', 'verified','checkUserRole:'.UserRole::ADMIN->value  ])->name('admin.dashboard');
+
+Route::middleware(['auth', 'verified','checkUserRole:'.UserRole::ADMIN->value ])
+    ->prefix('admin')
+    ->group(function () {
+
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        });
+
+        Route::resource('users', UserController::class);
+
+});
+
+
+
+//Route::get('/admin/dashboard', function () {
+//   return view('admin.dashboard');
+//})->middleware(['auth', 'verified','checkUserRole:'.UserRole::ADMIN->value  ])->name('admin.dashboard');
 
 Route::get('/teacher/dashboard', function () {
     return view('teacher.dashboard');
