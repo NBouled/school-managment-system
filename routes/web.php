@@ -2,10 +2,27 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use \App\Enum\UserRole;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+// We willen 3 veschillende dashboard routes: admin / teacher / student
+
+Route::get('/admin/dashboard', function () {
+   return view('admin.dashboard');
+})->middleware(['auth', 'verified','checkUserRole:'.UserRole::ADMIN->value  ])->name('admin.dashboard');
+
+Route::get('/teacher/dashboard', function () {
+    return view('teacher.dashboard');
+})->middleware(['auth', 'verified','checkUserRole:'.UserRole::TEACHER->value ])->name('teacher.dashboard');
+
+Route::get('/student/dashboard', function () {
+    return view('student.dashboard');
+})->middleware(['auth', 'verified','checkUserRole:'.UserRole::STUDENT->value ])->name('student.dashboard');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
