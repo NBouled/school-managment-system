@@ -115,9 +115,22 @@
                                     {{--                                    </span>--}}
                                     {{--                                </td>--}}
                                     <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">
+
+                                        <a  href="{{route('users.show', $user)}}" class="text-gray-600 hover:text-gray-900">
+                                            View
+                                        </a>
+                                        <a href="{{route('users.edit', $user)}}" class="text-indigo-600 hover:text-indigo-900">
                                             Edit
                                         </a>
+
+                                        <form method="POST" action="{{ route('users.destroy', $user->id) }}" id="deleteForm">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="text-red-600 hover:text-red-900"
+                                                    onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this?')) this.form.submit();">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
