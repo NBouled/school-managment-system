@@ -26,7 +26,9 @@ class User extends Authenticatable
         'house_number',
         'zip_code',
         'city',
-        'country'
+        'country',
+        'role',
+        'date_of_birth'
     ];
 
     /**

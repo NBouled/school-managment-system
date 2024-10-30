@@ -19,7 +19,7 @@ Route::middleware(['auth', 'verified','checkUserRole:'.UserRole::ADMIN->value ])
 
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
-        });
+        })->name('admin.dashboard');
 
         Route::resource('users', UserController::class);
 
