@@ -10,9 +10,7 @@ Route::get('/', function () {
 });
 
 
-// We willen 3 veschillende dashboard routes: admin / teacher / student
-
-
+// Routes admin
 Route::middleware(['auth', 'verified','checkUserRole:'.UserRole::ADMIN->value ])
     ->prefix('admin')
     ->group(function () {
@@ -25,11 +23,6 @@ Route::middleware(['auth', 'verified','checkUserRole:'.UserRole::ADMIN->value ])
 
 });
 
-
-
-//Route::get('/admin/dashboard', function () {
-//   return view('admin.dashboard');
-//})->middleware(['auth', 'verified','checkUserRole:'.UserRole::ADMIN->value  ])->name('admin.dashboard');
 
 Route::get('/teacher/dashboard', function () {
     return view('teacher.dashboard');
