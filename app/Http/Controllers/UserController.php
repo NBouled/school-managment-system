@@ -30,6 +30,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // validation
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
+            'date_of_birth' => 'required|date|before:2010-01-01',
+            'role' => 'required|string',
+            'street' => 'nullable|string|max:15',
+            'house_number' => 'nullable|string|max:10',
+            'postal_code' => 'nullable|string|max:15',
+            'city' => 'nullable|string|max:15',
+            'country' => 'nullable|string|max:15'
+        ]);
 
         User::create($request->all());
 
@@ -62,6 +75,20 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'required|string|min:6',
+            'date_of_birth' => 'required|date|before:2010-01-01',
+            'role' => 'required|string',
+            'street' => 'nullable|string|max:15',
+            'house_number' => 'nullable|string|max:10',
+            'postal_code' => 'nullable|string|max:15',
+            'city' => 'nullable|string|max:15',
+            'country' => 'nullable|string|max:15'
+        ]);
+
+
         $user = User::find($id);
 
         $user->update($request->all());

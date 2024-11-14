@@ -12,7 +12,7 @@
                 <div>
                     <x-input-label for="name" :value="__('Name')"/>
                     <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$course->name"
-                                  required autofocus autocomplete="name"/>
+                                   autofocus autocomplete="name"/>
                     <x-input-error :messages="$errors->get('name')" class="mt-2"/>
                 </div>
                 <div>
@@ -23,7 +23,7 @@
                 <div>
                     <x-input-label for="name" :value="__('Credits')"/>
                     <x-text-input step="10" id="credits" class="block mt-1 w-full" type="number" name="credits" :value="$course->credits"
-                                  required autofocus autocomplete="name"/>
+                                   autofocus autocomplete="name"/>
                     <x-input-error :messages="$errors->get('credits')" class="mt-2"/>
                 </div>
                 <div>
