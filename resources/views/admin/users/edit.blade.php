@@ -38,7 +38,10 @@
                     <x-input-label for="role" :value="__('Role')"/>
                     <select name="role">
                         @foreach(\App\Enum\UserRole::cases() as $role)
-                            <option value="{{$role->value}}">{{$role->value}}</option>
+                            <option value="{{$role->value}}"
+                                    @if($user->role == $role) selected @endif >
+                                {{$role}}
+                            </option>
                         @endforeach
                     </select>
                     <x-input-error :messages="$errors->get('role')" class="mt-2"/>

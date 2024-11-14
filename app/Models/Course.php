@@ -21,6 +21,7 @@ class Course extends Model
         'name',
         'description',
         'credits',
+        'teacher_id'
     ];
 
     public function teacher(): BelongsTo
