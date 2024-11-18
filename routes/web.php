@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use \App\Enum\UserRole;
@@ -16,9 +17,7 @@ Route::middleware(['auth', 'verified','checkUserRole:'.UserRole::ADMIN->value ])
     ->prefix('admin')
     ->group(function () {
 
-        Route::get('/dashboards', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
         Route::resource('users', UserController::class);
         Route::resource('courses', CourseController::class);
