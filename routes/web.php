@@ -28,10 +28,30 @@ Route::get('/teacher/dashboard', function () {
     return view('teacher.dashboard');
 })->middleware(['auth', 'verified','checkUserRole:'.UserRole::TEACHER->value ])->name('teacher.dashboard');
 
-// Routes students
-Route::get('/student/dashboard', function () {
-    return view('student.dashboard');
-})->middleware(['auth', 'verified','checkUserRole:'.UserRole::STUDENT->value ])->name('student.dashboard');
+
+
+
+Route::middleware(['auth', 'verified','checkUserRole:'.UserRole::STUDENT->value ])
+    ->prefix('student')
+    ->group(function () {
+
+        Route::get('/dashboard', [\App\Http\Controllers\Student\DashboardController::class, 'index'])->name('student.dashboard');
+        Route::get('/courses', [\App\Http\Controllers\Student\CourseController::class, 'index'])->name('student.courses');
+        Route::get('/courses/{course}', [\App\Http\Controllers\Student\CourseController::class, 'show'])->name('student.courses.show');
+
+        Route::post('/courses/{course}/student/{student}/enroll', [\App\Http\Controllers\Student\CourseController::class, 'enroll'])->name('student.courses.enroll');
+    });
+
+
+
+
+
+//// Routes students
+//Route::get('/student/dashboard', function () {
+//    return view('student.dashboard');
+//
+//
+//})->middleware(['auth', 'verified','checkUserRole:'.UserRole::STUDENT->value ])->name('student.dashboard');
 
 
 
