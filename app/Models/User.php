@@ -56,11 +56,15 @@ class User extends Authenticatable
         ];
     }
 
-    public function courses(): ?HasMany
+    public function courses()
     {
         if ($this->role == UserRole::TEACHER) {
             return $this->hasMany(Course::class);
         }
+        elseif($this->role == UserRole::STUDENT) {
+            return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id');
+        }
+
         return null;
     }
 }

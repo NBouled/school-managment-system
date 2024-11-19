@@ -32,13 +32,13 @@ class DatabaseSeeder extends Seeder
 //            'role' => UserRole::TEACHER
 //        ]);
 //
-//        User::factory()->create([
-//            'name' => 'student',
-//            'email' => 'student@example.com',
-//            'password' => bcrypt('password'),
-//            'role' => UserRole::STUDENT
-//        ]);
+        User::factory()->create([
+            'name' => 'student',
+            'email' => 'student@example.com',
+            'password' => bcrypt('password'),
+            'role' => UserRole::STUDENT
+        ]);
 
-         Course::factory(10)->create();
+//         Course::factory(10)->create();
     }
 }
