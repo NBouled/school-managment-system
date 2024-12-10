@@ -8,8 +8,12 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
 
+    // ingelogde user zijn enrolled courses kunnen tonen in the dashboard pagina.
+    // maak link van de naam course en die brengt ons naar de course page
     public function index(){
 
-        return view('student.dashboard');
+        $courses = auth()->user()->courses()->get();
+
+        return view('student.dashboard', ['courses' => $courses]);
     }
 }
