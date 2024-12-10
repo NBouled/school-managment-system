@@ -11,7 +11,6 @@
                 <div class="p-4">
                     <h3 class="text-xl font-semibold">My Enrolled courses</h3>
                 </div>
-
                 @foreach($courses as $course)
                     <a href="{{route('student.courses.show', $course)}}"  class="block p-3 text-gray-900 hover:text-blue-700 cursor-pointer dark:text-gray-100">
                         {{ $course->name }}
