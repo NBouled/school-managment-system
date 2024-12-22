@@ -1,13 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between align-middle">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <div class="flex justify-between">
+            <div class="flex justify-between align-middle">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{$course->name}}
-            </h2>
+                </h2>
+            </div>
+            <div>
+                <a href="{{route('teacher.courses.exams.create', $course)}}">Create Exam</a>
+            </div>
         </div>
     </x-slot>
 
     <div class="py-12">
+        {{--Exams list--}}
+
+
         @if ( session('success') )
             <div class="font-medium text-sm bg-green-50 text-green-600 dark:text-green-400 p-4">
                 {{   session('success')  }}

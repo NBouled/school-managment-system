@@ -3,6 +3,7 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Teacher\ExamController;
 use Illuminate\Support\Facades\Route;
 use \App\Enum\UserRole;
 use \App\Http\Controllers\UserController;
@@ -29,6 +30,11 @@ Route::middleware(['auth', 'verified','checkUserRole:'.UserRole::TEACHER->value 
     ->group(function () {
        Route::get('/dashboard', [\App\Http\Controllers\Teacher\DashboardController::class, 'index'])->name('teacher.dashboard');
        Route::get('courses/{course}', [\App\Http\Controllers\Teacher\CourseController::class, 'show'])->name('teacher.courses.show');
+
+       Route::resource('courses.exams', ExamController::class, ['as' => 'teacher']);
+     //  Route::resource('questions', \App\Http\Controllers\Teacher\QuestionController::class);
+
+
     });
 
 Route::middleware(['auth', 'verified','checkUserRole:'.UserRole::STUDENT->value ])
