@@ -100,7 +100,7 @@
                                             {{$course->created_at}}
                                         </p>
                                     </td>
-                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                    <td class="px-5 py-5 text-sm bg-white border-b border-gray-200 flex gap-2 items-center">
 
                                         <a href="{{route('courses.show', $course)}}"
                                            class="text-gray-600 hover:text-gray-900">

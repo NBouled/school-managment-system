@@ -12,7 +12,8 @@ class CourseController extends Controller
     public function show(Course $course){
 
         $students = $course->students()->paginate(15);
+        $exams = $course->exams()->paginate(10);
 
-        return view('teacher.courses.show', ['course' => $course, 'students' => $students]);
+        return view('teacher.courses.show', ['course' => $course, 'students' => $students, 'exams' => $exams]);
     }
 }
