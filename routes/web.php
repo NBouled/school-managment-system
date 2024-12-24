@@ -32,8 +32,7 @@ Route::middleware(['auth', 'verified','checkUserRole:'.UserRole::TEACHER->value 
        Route::get('courses/{course}', [\App\Http\Controllers\Teacher\CourseController::class, 'show'])->name('teacher.courses.show');
 
        Route::resource('courses.exams', ExamController::class, ['as' => 'teacher']);
-     //  Route::resource('questions', \App\Http\Controllers\Teacher\QuestionController::class);
-
+       Route::resource('courses.exams.questions', \App\Http\Controllers\Teacher\QuestionController::class, ['as' => 'teacher']);
 
     });
 

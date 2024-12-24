@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Enum\ExamStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Exam;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ExamController extends Controller
 {
@@ -30,12 +32,13 @@ class ExamController extends Controller
      */
     public function store(Request $request, Course $course)
     {
-
-        // Validations
-        /*TODO::
-            1. title required/string 2. status required/string 3. start required/start date moet later zijn dan NU. 4. end required/moet later zijn dan start
-       5. description nullable
-        */
+        $request->validate([
+            'title' => 'required|string',
+            'status' => [Rule::enum(ExamStatus::class)],
+            'start' => 'required|date|after:now',
+            'end' => 'required|date|after:start',
+            'description' => 'nullable|string',
+        ]);
 
         $course->exams()->create($request->all());
 
@@ -56,7 +59,9 @@ class ExamController extends Controller
      */
     public function edit(Course $course,Exam $exam)
     {
-        return view('teacher.courses.exams.edit', ['course' => $course, 'exam' => $exam]);
+        $questions = $exam->questions()->paginate(10);
+
+        return view('teacher.courses.exams.edit', ['course' => $course, 'exam' => $exam, 'questions' => $questions]);
     }
 
     /**
@@ -64,7 +69,13 @@ class ExamController extends Controller
      */
     public function update(Request $request,Course $course, Exam $exam)
     {
-        // Validations
+        $request->validate([
+            'title' => 'required|string',
+            'status' => [Rule::enum(ExamStatus::class)],
+            'start' => 'required|date|after:now',
+            'end' => 'required|date|after:start',
+            'description' => 'nullable|string',
+        ]);
 
         $exam->update($request->all());
 

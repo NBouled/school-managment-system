@@ -21,6 +21,14 @@ class Question extends Model
         'options',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'options' => 'array',
+        ];
+    }
+
+
     public function exam(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
        return $this->belongsTo(Exam::class);

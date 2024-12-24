@@ -25,7 +25,7 @@
                     <div>
                         <x-input-label for="status" :value="__('Status')"/>
                         <x-select name="status" :options="\App\Enum\ExamStatus::cases()"  />
-
+                        <x-input-error :messages="$errors->get('status')" class="mt-2"/>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
@@ -33,16 +33,19 @@
                         <x-input-label for="start" :value="__('Start')"/>
                         <x-text-input id="start" class="block mt-1 w-full" type="datetime-local" name="start" :value="old('Start')"
                                       autofocus autocomplete="start"/>
+                        <x-input-error :messages="$errors->get('start')" class="mt-2"/>
                     </div>
                     <div>
                         <x-input-label for="end" :value="__('End')"/>
                         <x-text-input id="end" class="block mt-1 w-full" type="datetime-local" name="end" :value="old('End')"
                                       autofocus autocomplete="end"/>
+                        <x-input-error :messages="$errors->get('end')" class="mt-2"/>
                     </div>
                 </div>
                 <div>
                     <x-input-label for="text" :value="__('Description')"/>
                     <x-textarea name="description" />
+                    <x-input-error :messages="$errors->get('description')" class="mt-2"/>
                 </div>
             </x-form.create>
         </div>

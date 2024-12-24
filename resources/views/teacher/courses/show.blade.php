@@ -7,7 +7,7 @@
                 </h2>
             </div>
             <div>
-                <a href="{{route('teacher.courses.exams.create', $course)}}">Create Exam</a>
+                <x-nav-button name="Create Exam" :route="route('teacher.courses.exams.create', $course)" />
             </div>
         </div>
     </x-slot>
