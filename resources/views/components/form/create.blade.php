@@ -1,6 +1,6 @@
 @props(['route' => '', 'title' => ''])
 
-<form method="POST" class="space-y-5 bg-white p-3 mb-4 rounded-2xl" action="{{$route}}" >
+<form method="POST" class="space-y-5 bg-white p-3 mb-4 rounded-2xl" action="{{$route}}" enctype="multipart/form-data" >
     @csrf
     <h2 class="text-xl font-semibold flex gap-2 items-center"><x-heroicon-s-plus-circle class="h-7 w-7 text-blue-600 " /> {{$title}}</h2>
         {{$slot}}

@@ -110,10 +110,10 @@
 {{--                                           class="text-gray-600 hover:text-gray-900">--}}
 {{--                                            View--}}
 {{--                                        </a>--}}
-{{--                                        <a href="{{route('teacher.courses.exams.edit', [$course,$exam])}}"--}}
-{{--                                           class="text-indigo-600 hover:text-indigo-900">--}}
-{{--                                            Edit--}}
-{{--                                        </a>--}}
+                                        <a href="{{route('teacher.courses.exams.questions.edit', [$course,$exam, $question])}}"
+                                           class="text-indigo-600 hover:text-indigo-900">
+                                            Edit
+                                        </a>
 
 {{--                                        <form method="POST" action="{{ route('teacher.courses.exams.destroy', [$course,$exam]) }}"--}}
 {{--                                              id="deleteForm">--}}

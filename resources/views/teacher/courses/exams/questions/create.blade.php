@@ -14,7 +14,7 @@
             </div>
         @endif
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <x-form.create title="Create Question" :route="route('teacher.courses.exams.questions.store', [$course, $exam])">
+            <x-form.create  title="Create Question" :route="route('teacher.courses.exams.questions.store', [$course, $exam])">
                 <div>
                     <x-input-label for="text" :value="__('Text')"/>
                     <x-text-input id="text" class="block mt-1 w-full" type="text" name="text" :value="old('text')"

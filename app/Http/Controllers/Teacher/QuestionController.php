@@ -33,9 +33,24 @@ class QuestionController extends Controller
     {
         // TODO:: add validation / File storage
 
-        $exam->questions()->create($request->all());
+        $request->validate([
+                'text' => 'required|string',
+                'image' => 'file|mimes:jpeg,jpg,png',
+                'description' => 'string|nullable',
+                'options' => 'required|array|min:2',
+        ]);
 
-        return redirect()->route('teacher.courses.exams.edit', ['course' => $course, 'exam' => $exam])->with('succces', 'Question created successfully');
+        $filePath = $request->file('image')->store('images', 'public');
+
+        $exam->questions()->create([
+            'text' => $request->text,
+            'image' => $filePath,
+            'description' => $request->description,
+            'options' => $request->options
+
+        ]);
+
+        return redirect()->route('teacher.courses.exams.edit', ['course' => $course, 'exam' => $exam])->with('success', 'Question created successfully');
     }
 
     /**
@@ -49,17 +64,35 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Question $question)
+    public function edit(Course $course, Exam $exam, Question $question)
     {
-        //
+        return view('teacher.courses.exams.questions.edit', ['question' => $question,'course' => $course, 'exam' => $exam]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request, Course $course, Exam $exam, Question $question)
     {
-        //
+        $request->validate([
+            'text' => 'required|string',
+            'image' => 'nullable|file|mimes:jpeg,jpg,png',
+            'description' => 'string|nullable',
+            'options' => 'required|array|min:2',
+        ]);
+
+        if($request->hasFile('image')){
+            $filePath = $request->file('image')->store('images', 'public');
+        }
+
+        $question->update([
+                'text' => $request->text,
+                'image' => $filePath ?? $question->image,
+                'description' => $request->description,
+                'options' => $request->options
+        ]);
+
+        return redirect()->route('teacher.courses.exams.edit', ['course' => $course, 'exam' => $exam])->with('success', 'Question update successfully');
     }
 
     /**
